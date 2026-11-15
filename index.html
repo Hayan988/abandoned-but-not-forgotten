@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abandoned But Not Forgotten | NASA Space Apps 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050811;
+            color: #e2e8f0;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(14, 165, 233, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.08), transparent 25%);
+        }
+        h1, h2, h3, .font-space {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(14, 165, 233, 0.25);
+        }
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 90px 40px, #38bdf8, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 160px 120px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 230px 80px, rgba(255,255,255,0.6), rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 250px 250px;
+            opacity: 0.4;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050811;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-sky-500 selection:text-white">
+    <div class="starfield"></div>
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-40 border-b border-slate-800/80 bg-[#050811]/85 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20">NASA Space Apps 2026 • Team Starlight Archivist</span>
+                    </div>
+                    <h1 class="text-xl sm:text-2xl font-bold text-white tracking-tight mt-0.5">Abandoned, But Not Forgotten</h1>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+                <button onclick="openStoryMode(0)" class="px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 text-sm font-bold shadow-lg shadow-amber-500/25 transition flex items-center gap-2">
+                    <span>📖</span> Story Mode
+                </button>
+                <button onclick="openQuizModal()" class="px-4 py-2 rounded-lg bg-indigo-600/90 hover:bg-indigo-500 text-white text-sm font-semibold border border-indigo-400/30 transition flex items-center gap-2">
+                    <span>🚀</span> Cadet Quiz
+                </button>
+                <button onclick="openTheoryModal()" class="px-4 py-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-sm font-medium border border-slate-700 transition flex items-center gap-2">
+                    <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Why Left Behind?
+                </button>
+                <button onclick="openRandomMission()" class="px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 text-sm font-semibold shadow-lg shadow-sky-500/25 transition flex items-center gap-2">
+                    <span>🎲</span> Random Relic
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+        <!-- Hero & Stats Banner -->
+        <section class="mb-10">
+            <div class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-800 relative overflow-hidden">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                    <div class="max-w-3xl">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-medium mb-3">
+                            <span>✨ Designed for School-Age Space Explorers (Ages 8–18) & Curious Minds</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-white mb-3">Bring Silent Space Monuments Back to Life</h2>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-4">
+                            Across the Moon, Mars, asteroids, and deep space, 40 robotic explorers and crewed modules stand silently as monuments to human curiosity. Read their <strong class="text-sky-400">first-person diaries</strong>, discover how they operated, and see the <strong class="text-emerald-400">groundbreaking science</strong> they unlocked for today's explorers.
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
+                        <button onclick="openStoryMode(0)" class="px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/20 transition text-center">
+                            Start Interactive Story Journey →
+                        </button>
+                        <button onclick="openQuizModal()" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-sky-400 border border-sky-500/30 font-semibold text-xs transition text-center">
+                            Test Your Knowledge (Space Cadet Quiz)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Featured Space Visual Showcase (Works Offline + Real NASA Imagery Fallback) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 pt-6 border-t border-slate-800/80">
+                    <div class="relative h-44 sm:h-48 rounded-xl overflow-hidden border border-slate-700/70 group bg-slate-950">
+                        <img src="https://images-assets.nasa.gov/image/as11-40-5874/as11-40-5874~medium.jpg" 
+                             alt="Apollo 11 Lunar Module on the Moon"
+                             onerror="this.style.display='none'"
+                             class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#050811] via-[#050811]/30 to-transparent flex flex-col justify-end p-4">
+                            <span class="text-[10px] font-mono uppercase tracking-wider text-amber-400">Tranquility Base • 1969</span>
+                            <p class="text-sm font-bold text-white">Silent Monuments on the Lunar Surface</p>
+                        </div>
+                    </div>
+
+                    <div class="relative h-44 sm:h-48 rounded-xl overflow-hidden border border-slate-700/70 group bg-slate-950">
+                        <img src="https://images-assets.nasa.gov/image/PIA23378/PIA23378~medium.jpg" 
+                             alt="Deep Space Nebula and Exploration"
+                             onerror="this.style.display='none'"
+                             class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#050811] via-[#050811]/30 to-transparent flex flex-col justify-end p-4">
+                            <span class="text-[10px] font-mono uppercase tracking-wider text-sky-400">Outer Solar System & Beyond</span>
+                            <p class="text-sm font-bold text-white">Drifting Messengers Across Deep Space</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Metrics -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 mt-4 border-t border-slate-800/80">
+                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800">
+                        <div class="text-xs text-slate-400">Cataloged Missions</div>
+                        <div class="text-xl sm:text-2xl font-bold text-white font-space mt-0.5">40</div>
+                    </div>
+                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800">
+                        <div class="text-xs text-slate-400">Currently Showing</div>
+                        <div id="stat-showing" class="text-xl sm:text-2xl font-bold text-sky-400 font-space mt-0.5">40</div>
+                    </div>
+                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800">
+                        <div class="text-xs text-slate-400">Celestial Regions</div>
+                        <div class="text-xl sm:text-2xl font-bold text-amber-400 font-space mt-0.5">6</div>
+                    </div>
+                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800">
+                        <div class="text-xs text-slate-400">Mission Span</div>
+                        <div class="text-xl sm:text-2xl font-bold text-emerald-400 font-space mt-0.5">1962–2025</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search & Filter Controls -->
+        <section class="mb-8 space-y-4">
+            <div class="flex flex-col lg:flex-row gap-4 justify-between">
+                <!-- Search Box -->
+                <div class="relative flex-grow max-w-xl">
+                    <svg class="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Search spacecraft (e.g., Opportunity, Cassini, Apollo, water ice)..." 
+                        class="w-full pl-11 pr-4 py-2.5 bg-slate-900/90 border border-slate-700 rounded-xl text-sm text-white placeholder-slate-400 focus:outline-none focus:border-sky-500 transition">
+                </div>
+
+                <!-- Fate Filter Dropdown -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <select id="fateFilter" class="px-4 py-2.5 bg-slate-900/90 border border-slate-700 rounded-xl text-sm text-slate-200 focus:outline-none focus:border-sky-500">
+                        <option value="ALL">All End-of-Mission Fates</option>
+                        <option value="Power & Fuel">Fuel & Power Exhaustion</option>
+                        <option value="Design & Mass">Mass & Design Constraints</option>
+                        <option value="Planetary Protection">Planetary Protection</option>
+                        <option value="Orbital Debris">Orbital Debris Mitigation</option>
+                        <option value="Anomaly">Hardware / Software Anomaly</option>
+                    </select>
+
+                    <button onclick="resetFilters()" class="px-3.5 py-2.5 text-xs font-mono uppercase tracking-wider text-slate-400 hover:text-white bg-slate-900/60 border border-slate-800 rounded-xl transition">
+                        Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- Destination Pills -->
+            <div class="flex flex-wrap gap-2" id="regionPills">
+                <button data-region="ALL" class="region-btn active px-4 py-1.5 rounded-full text-xs font-medium bg-sky-500 text-slate-950 font-semibold transition">All Destinations (40)</button>
+                <button data-region="Moon" class="region-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-900 text-slate-300 border border-slate-700 hover:border-sky-500/50 transition">🌕 Moon (13)</button>
+                <button data-region="Mars" class="region-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-900 text-slate-300 border border-slate-700 hover:border-sky-500/50 transition">🔴 Mars (10)</button>
+                <button data-region="Outer Planets" class="region-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-900 text-slate-300 border border-slate-700 hover:border-sky-500/50 transition">🪐 Outer Planets & Interstellar (3)</button>
+                <button data-region="Inner Planets" class="region-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-900 text-slate-300 border border-slate-700 hover:border-sky-500/50 transition">☀️ Venus & Mercury (2)</button>
+                <button data-region="Asteroids & Comets" class="region-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-900 text-slate-300 border border-slate-700 hover:border-sky-500/50 transition">☄️ Asteroids & Comets (5)</button>
+                <button data-region="Earth & Heliocentric" class="region-btn px-4 py-1.5 rounded-full text-xs font-medium bg-slate-900 text-slate-300 border border-slate-700 hover:border-sky-500/50 transition">🌍 Earth & Deep Orbit (7)</button>
+            </div>
+        </section>
+
+        <!-- Spacecraft Cards Grid -->
+        <section id="missionsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Populated dynamically via JS -->
+        </section>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden text-center py-16 glass-card rounded-2xl">
+            <p class="text-slate-400 text-lg mb-2">No spacecraft matched your filter criteria.</p>
+            <button onclick="resetFilters()" class="text-sky-400 hover:underline text-sm font-medium">Clear all filters</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 bg-[#050811] py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+            <div>NASA International Space Apps Challenge 2026 • City University, Peshawar • <span class="text-sky-400 font-medium">Team Starlight Archivist</span></div>
+            <div>Data Source: <span class="text-slate-300 font-medium">NASA Space Science Data Coordinated Archive (NSSDCA)</span> & Mission Logs</div>
+        </div>
+    </footer>
+
+    <!-- Mission Detail Modal (Upgraded with First-Person Artifact Diary) -->
+    <div id="missionModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-[#0b1120] border border-sky-500/30 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl shadow-sky-950/50">
+            <div class="p-6 sm:p-8">
+                <div class="flex items-start justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span id="modalId" class="font-mono text-xs px-2 py-0.5 rounded bg-sky-500/15 text-sky-400 font-semibold">#01</span>
+                            <span id="modalRegion" class="text-xs font-medium text-slate-400">Moon</span>
+                            <span class="text-[11px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Status: Silent Monument</span>
+                        </div>
+                        <h3 id="modalTitle" class="text-2xl font-bold text-white">Mission Name</h3>
+                        <p id="modalType" class="text-sm text-sky-400 mt-0.5">Spacecraft Classification</p>
+                    </div>
+                    <button onclick="closeModal('missionModal')" class="p-2 rounded-lg bg-slate-800/80 text-slate-400 hover:text-white transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+
+                <div class="py-5 space-y-5">
+                    <!-- Region / Spacecraft Visual Banner -->
+                    <div class="relative h-44 sm:h-52 rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
+                        <img id="modalImage" src="" alt="Spacecraft and Celestial Destination" class="w-full h-full object-cover opacity-90">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-transparent to-transparent"></div>
+                    </div>
+
+                    <!-- First-Person Artifact Diary ("Voice of the Spacecraft") -->
+                    <div class="bg-amber-500/10 border-l-4 border-amber-400 p-4 rounded-r-xl">
+                        <div class="text-[11px] font-mono uppercase tracking-wider text-amber-300 font-semibold mb-1">🎙️ Voice of the Artifact (First-Person Log)</div>
+                        <p id="modalDiary" class="text-sm italic text-amber-100 leading-relaxed"></p>
+                    </div>
+
+                    <!-- Telemetry Metadata -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-800">
+                            <div class="text-[11px] font-mono uppercase text-slate-500">Final Resting Location</div>
+                            <div id="modalLocation" class="text-sm font-medium text-slate-200 mt-1">Location</div>
+                        </div>
+                        <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-800">
+                            <div class="text-[11px] font-mono uppercase text-slate-500">Active Mission Period</div>
+                            <div id="modalPeriod" class="text-sm font-medium text-slate-200 mt-1">Dates</div>
+                        </div>
+                    </div>
+
+                    <!-- Fate Category Badge -->
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-slate-400">Primary End-of-Mission Cause:</span>
+                        <span id="modalFateBadge" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">Category</span>
+                    </div>
+
+                    <!-- Why It Ended -->
+                    <div>
+                        <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">How It Operated & Why Its Mission Ended</h4>
+                        <p id="modalFateDesc" class="text-sm text-slate-300 leading-relaxed bg-slate-900/40 p-4 rounded-xl border border-slate-800/80"></p>
+                    </div>
+
+                    <!-- Enriched Scientific Legacy -->
+                    <div class="bg-gradient-to-r from-sky-950/50 to-indigo-950/40 border border-sky-500/25 p-4 rounded-xl">
+                        <div class="flex items-center gap-2 mb-1.5">
+                            <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                            <h4 class="text-xs font-mono uppercase tracking-wider text-sky-300 font-semibold">Science It Made Possible (Legacy)</h4>
+                        </div>
+                        <p id="modalScience" class="text-sm text-slate-200 leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Story Mode Modal (For School-Age Space Enthusiasts) -->
+    <div id="storyModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+        <div class="bg-[#0b1120] border border-amber-500/40 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl shadow-amber-950/40">
+            <div class="p-6 sm:p-8">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
+                    <div>
+                        <span id="storyChapterBadge" class="font-mono text-xs px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold">Chapter 1 of 8</span>
+                        <h3 id="storyTitle" class="text-xl sm:text-2xl font-bold text-white mt-1">Story Title</h3>
+                    </div>
+                    <button onclick="closeModal('storyModal')" class="p-2 rounded-lg bg-slate-800 text-slate-400 hover:text-white">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="relative h-44 sm:h-52 rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
+                        <img id="storyImage" src="" alt="Story Chapter Space Visual" class="w-full h-full object-cover opacity-90">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-transparent to-transparent"></div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs text-slate-400 bg-slate-900/90 px-4 py-2.5 rounded-xl border border-slate-800">
+                        <span>📍 <strong id="storyLocation" class="text-slate-200">Location</strong></span>
+                        <span>🗓️ <strong id="storyYear" class="text-sky-400">Year</strong></span>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-slate-900 to-slate-950 p-5 rounded-xl border border-amber-500/20">
+                        <div class="text-xs font-mono uppercase text-amber-400 mb-2">📖 Artifact Transmission Log</div>
+                        <p id="storyNarrative" class="text-sm sm:text-base text-slate-200 leading-relaxed"></p>
+                    </div>
+
+                    <div class="bg-sky-950/40 p-4 rounded-xl border border-sky-500/25">
+                        <div class="text-xs font-mono uppercase text-sky-300 font-semibold mb-1">🔬 What This Taught Humanity</div>
+                        <p id="storyScience" class="text-sm text-slate-300 leading-relaxed"></p>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between gap-3">
+                    <button id="prevStoryBtn" onclick="changeStory(-1)" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium transition disabled:opacity-40">
+                        ← Previous
+                    </button>
+                    <div class="flex gap-1.5" id="storyDots"></div>
+                    <button id="nextStoryBtn" onclick="changeStory(1)" class="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-sm font-bold transition">
+                        Next Chapter →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Space Cadet Quiz Modal -->
+    <div id="quizModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+        <div class="bg-[#0b1120] border border-indigo-500/40 rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div class="p-6 sm:p-8">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
+                    <div>
+                        <span class="font-mono text-xs text-indigo-400 uppercase tracking-wider">Junior Space Explorer Challenge</span>
+                        <h3 class="text-xl font-bold text-white">Space Cadet Artifact Quiz</h3>
+                    </div>
+                    <button onclick="closeModal('quizModal')" class="p-2 rounded-lg bg-slate-800 text-slate-400 hover:text-white">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+
+                <div id="quizContainer" class="space-y-4">
+                    <div class="flex justify-between text-xs text-slate-400">
+                        <span id="quizProgress">Question 1 of 5</span>
+                        <span id="quizScore" class="text-emerald-400 font-semibold">Score: 0</span>
+                    </div>
+                    <p id="quizQuestion" class="text-base font-semibold text-white leading-relaxed"></p>
+                    <div id="quizOptions" class="space-y-2.5"></div>
+                    <div id="quizFeedback" class="hidden p-3.5 rounded-xl text-sm"></div>
+                    <div class="pt-2 flex justify-end">
+                        <button id="nextQuizBtn" onclick="nextQuizQuestion()" class="hidden px-5 py-2 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white text-sm font-semibold transition">
+                            Next Question →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theory Modal: Why NASA Leaves Spacecraft Behind -->
+    <div id="theoryModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-[#0b1120] border border-sky-500/30 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div class="p-6 sm:p-8">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
+                    <h3 class="text-xl font-bold text-white">Why Does NASA Leave Spacecraft Behind?</h3>
+                    <button onclick="closeModal('theoryModal')" class="p-2 rounded-lg bg-slate-800 text-slate-400 hover:text-white">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+                <p class="text-sm text-slate-300 mb-5 leading-relaxed">
+                    Returning hardware from deep space or planetary surfaces requires exponential amounts of propellant (governed by the Tsiolkovsky rocket equation). Instead, NASA retires or disposes of hardware for five primary scientific and engineering reasons:
+                </p>
+                <div class="space-y-3 text-sm">
+                    <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
+                        <span class="font-semibold text-amber-400">1. Fuel & Power Exhaustion:</span> Batteries freeze during two-week lunar nights, Martian dust coats solar panels, plutonium RTGs decay over decades, or attitude propellant runs dry.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
+                        <span class="font-semibold text-sky-400">2. Mass & Design Constraints:</span> Crewed lunar landers and rovers were engineered for one-way delivery to maximize return fuel and sample payload for astronauts.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
+                        <span class="font-semibold text-emerald-400">3. Planetary Protection:</span> Outer-planet orbiters (like Cassini and Galileo) are intentionally vaporized in gas-giant atmospheres so Earth microbes cannot contaminate potentially habitable ocean moons like Enceladus or Europa.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
+                        <span class="font-semibold text-purple-400">4. Orbital Debris Mitigation:</span> Satellites and lunar orbiters are deorbited into oceans or uninhabited lunar zones to prevent collisions with active missions or historic Apollo heritage sites.
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
+                        <span class="font-semibold text-rose-400">5. Hardware & Software Anomalies:</span> Extreme thermal cycles, metric-to-imperial navigation errors, or memory rollovers occasionally sever communications permanently.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Complete Dataset of 40 NASA Spacecraft from the Guide + Enriched Scientific Legacy
+        const missions = [
+            {
+                id: "01",
+                name: "Apollo 11 Lunar Module (Eagle) & EASEP",
+                region: "Moon",
+                location: "Moon (Sea of Tranquility)",
+                period: "July 1969",
+                type: "Crewed Lander / Surface Science",
+                fateCategory: "Design & Mass",
+                fate: "Completed the first crewed lunar landing. The descent stage was permanently left on the surface as a launch pad for the ascent stage, while the ascent stage was jettisoned into lunar orbit after docking and eventually impacted the Moon. The Early Apollo Scientific Experiments Package (EASEP) remained active until losing telemetry and solar power.",
+                science: "Returned the first 21.55 kg of lunar rocks, proving the Moon has an ancient volcanic history, and deployed a Laser Ranging Retroreflector still used today to measure the Moon drifting away from Earth at 3.8 cm/year."
+            },
+            {
+                id: "02",
+                name: "Apollo 12 Lunar Module (Intrepid) & ALSEP",
+                region: "Moon",
+                location: "Moon (Ocean of Storms)",
+                period: "November 1969",
+                type: "Crewed Lander / Surface Science",
+                fateCategory: "Design & Mass",
+                fate: "Descent stage remained on the lunar surface after crew departure. Ascent stage was intentionally crashed into the Moon to calibrate the deployed Apollo Lunar Surface Experiments Package (ALSEP) seismometers. ALSEP was shut down in September 1977 due to budget cuts and declining nuclear power.",
+                science: "Demonstrated pinpoint lunar landing accuracy (landing within walking distance of Surveyor 3) and revealed that the Moon 'rings like a bell' for nearly an hour after impacts, mapping lunar crustal thickness."
+            },
+            {
+                id: "03",
+                name: "Apollo 14 Lunar Module (Antares) & ALSEP",
+                region: "Moon",
+                location: "Moon (Fra Mauro)",
+                period: "February 1971",
+                type: "Crewed Lander / Surface Science",
+                fateCategory: "Design & Mass",
+                fate: "Descent stage stayed on the Moon; ascent stage was intentionally deorbited into the lunar surface for seismic calibration. The Modularized Equipment Transporter (MET) handcart and ALSEP instruments were left behind, with ALSEP turned off in 1977.",
+                science: "Sampled the Fra Mauro formation—ejecta from the massive Imbrium basin impact—allowing scientists to date major asteroid bombardment eras in the early solar system."
+            },
+            {
+                id: "04",
+                name: "Apollo 15 Lunar Module (Falcon) & LRV-1",
+                region: "Moon",
+                location: "Moon (Hadley-Apennine)",
+                period: "July – August 1971",
+                type: "Crewed Lander / Lunar Rover",
+                fateCategory: "Power & Fuel",
+                fate: "First mission to carry a Lunar Roving Vehicle (LRV-1). After completing 27.9 km of driving, the rover's non-rechargeable silver-zinc batteries were depleted and it was parked to film the ascent stage liftoff. Both the descent stage and LRV-1 remain on the Moon.",
+                science: "Expanded astronaut exploration range dramatically and recovered the 'Genesis Rock' (anorthosite), confirming the Moon was once covered by a global magma ocean."
+            },
+            {
+                id: "05",
+                name: "Apollo 16 Lunar Module (Orion) & LRV-2",
+                region: "Moon",
+                location: "Moon (Descartes Highlands)",
+                period: "April 1972",
+                type: "Crewed Lander / Lunar Rover",
+                fateCategory: "Design & Mass",
+                fate: "Descent stage and second Lunar Roving Vehicle (LRV-2) were left on the surface when the mission ended. LRV-2's batteries were expendable and designed only for the three-day surface stay; the ascent stage later crashed into the Moon after losing attitude control.",
+                science: "Proved the lunar highlands were shaped by ancient meteorite impacts rather than volcanism, and operated the first lunar-based far-ultraviolet astronomical camera."
+            },
+            {
+                id: "06",
+                name: "Apollo 17 Lunar Module (Challenger) & LRV-3",
+                region: "Moon",
+                location: "Moon (Taurus-Littrow)",
+                period: "December 1972",
+                type: "Crewed Lander / Lunar Rover",
+                fateCategory: "Design & Mass",
+                fate: "Final Apollo lunar landing. Descent stage and LRV-3 (which drove 35.9 km) were left behind after mission completion as return mass constraints prohibited bringing them back to Earth.",
+                science: "Discovered 'orange soil' (volcanic glass beads) containing trapped volatile gases, providing crucial evidence of water inside the Moon's deep mantle."
+            },
+            {
+                id: "07",
+                name: "Surveyor 1, 3, 5, 6 & 7",
+                region: "Moon",
+                location: "Moon (Various Sites)",
+                period: "1966 – 1968",
+                type: "Robotic Lunar Landers",
+                fateCategory: "Power & Fuel",
+                fate: "Five soft-landing robotic probes that tested lunar soil and landing mechanics ahead of Apollo. All five were abandoned on the Moon once their primary missions ended and their batteries froze during the two-week lunar nights. (Apollo 12 astronauts later visited Surveyor 3 and retrieved its camera).",
+                science: "Proved the lunar surface was firm enough to support crewed landers (disproving fears of deep quicksand-like dust) and performed the first chemical soil analyses on another world."
+            },
+            {
+                id: "08",
+                name: "Ranger 4, 6, 7, 8 & 9",
+                region: "Moon",
+                location: "Moon (Hard Impact Sites)",
+                period: "1962 – 1965",
+                type: "Lunar Impact Probes",
+                fateCategory: "Design & Mass",
+                fate: "Designed as deliberate kamikaze impactors to transmit high-resolution close-up photographs of the lunar surface right up until collision. Ranger 4 suffered a timer failure and crashed silently; Rangers 6–9 impacted as planned (Ranger 6's camera failed prior to impact).",
+                science: "Transmitted over 17,000 close-up images of the Moon, revealing small-scale cratering hazards and paving the way for safe robotic and human landings."
+            },
+            {
+                id: "09",
+                name: "Lunar Orbiter 1–5",
+                region: "Moon",
+                location: "Moon (Lunar Orbit / Impact)",
+                period: "1966 – 1968",
+                type: "Lunar Mapping Satellites",
+                fateCategory: "Orbital Debris",
+                fate: "Mapped 99% of the Moon to select Apollo landing sites. Once their attitude-control propellant ran critically low, NASA intentionally commanded all five spacecraft to crash into the lunar surface so they would not become orbital hazards for future Apollo flights.",
+                science: "Produced the first global photographic atlas of the Moon and discovered 'mascons' (dense mass concentrations beneath lunar basins) that perturb spacecraft orbits."
+            },
+            {
+                id: "10",
+                name: "LADEE (Lunar Atmosphere & Dust Explorer)",
+                region: "Moon",
+                location: "Moon (Far Side Impact)",
+                period: "Sept 2013 – April 2014",
+                type: "Lunar Orbiter",
+                fateCategory: "Orbital Debris",
+                fate: "Studied the tenuous lunar exosphere and dust environment. After completing its primary and extended science phases, its propellant was exhausted and NASA deliberately deorbited it into the Moon's far side to avoid disturbing historic Apollo landing sites.",
+                science: "Confirmed that neon, helium, and argon dominate the Moon's thin exosphere and demonstrated high-speed deep-space laser communication (LLCD) for the first time."
+            },
+            {
+                id: "11",
+                name: "GRAIL (Ebb and Flow)",
+                region: "Moon",
+                location: "Moon (North Pole Impact)",
+                period: "Sept 2011 – Dec 2012",
+                type: "Twin Gravity-Mapping Orbiters",
+                fateCategory: "Power & Fuel",
+                fate: "Mapped the Moon's gravitational field in high detail. Once fuel depletion prevented maintaining low-altitude orbit, NASA intentionally crashed both probes into a mountain near the lunar north pole in December 2012.",
+                science: "Generated the highest-resolution gravity map of any celestial body, revealing that the Moon's crust is thinner and far more fractured by ancient impacts than previously thought."
+            },
+            {
+                id: "12",
+                name: "LCROSS & Centaur Upper Stage",
+                region: "Moon",
+                location: "Moon (Cabeus Crater)",
+                period: "June – October 2009",
+                type: "Lunar Impactor & Shepherding Spacecraft",
+                fateCategory: "Design & Mass",
+                fate: "Intentionally impacted into a permanently shadowed crater at the lunar south pole to excavate subsurface water ice. Both the spent Centaur rocket stage and the shepherding spacecraft were destroyed on impact as designed.",
+                science: "Definitively confirmed the presence of water ice and volatile compounds in permanently shadowed polar craters—forming the foundation for NASA's Artemis lunar base plans."
+            },
+            {
+                id: "13",
+                name: "Lunar Trailblazer",
+                region: "Moon",
+                location: "Deep Space / Geocentric Orbit",
+                period: "February 2025",
+                type: "Lunar Water-Mapping SmallSat",
+                fateCategory: "Anomaly",
+                fate: "Launched to map water ice on the Moon, but suffered severe power anomalies and lost two-way communication the day after launch. Without attitude control to point its solar arrays toward the Sun, the spacecraft became unresponsive and was declared lost.",
+                science: "Pioneered compact, high-resolution infrared spectrometer engineering (HVM3) for rideshare SmallSats, providing vital lessons on power-bus resilience for low-cost planetary missions."
+            },
+            {
+                id: "14",
+                name: "Viking 1 & Viking 2 Landers",
+                region: "Mars",
+                location: "Mars (Chryse & Utopia Planitia)",
+                period: "July 1976 – Nov 1982",
+                type: "Stationary Mars Landers",
+                fateCategory: "Anomaly",
+                fate: "First successful U.S. Mars landers. Viking 2 shut down in April 1980 when its batteries failed. Viking 1 operated for over six years until November 1982, when a faulty software command sent from Earth inadvertently overwrote its antenna-pointing data, severing communications permanently.",
+                science: "Captured the first color surface panoramas of Mars, conducted the first biological soil experiments, and monitored Martian weather patterns across multiple seasons."
+            },
+            {
+                id: "15",
+                name: "Mars Pathfinder & Sojourner Rover",
+                region: "Mars",
+                location: "Mars (Ares Vallis)",
+                period: "July – September 1997",
+                type: "Lander & First Mars Rover",
+                fateCategory: "Power & Fuel",
+                fate: "Demonstrated airbag-cushioned landing and deployed Sojourner, the first wheeled rover on Mars. Contact was lost in September 1997, likely because the lander's battery failed after repeated deep thermal cycles in the freezing Martian night.",
+                science: "Proved that low-cost 'faster, better, cheaper' robotic rovers could navigate Mars autonomously and found rounded pebbles showing Mars once had flowing liquid water."
+            },
+            {
+                id: "16",
+                name: "Mars Polar Lander & Deep Space 2",
+                region: "Mars",
+                location: "Mars (South Polar Region)",
+                period: "December 1999",
+                type: "Lander & Twin Penetrators",
+                fateCategory: "Anomaly",
+                fate: "Lost during atmospheric entry and descent. A software glitch misinterpreted vibrations from the landing legs deploying as touchdown, shutting off the descent engines ~40 meters above the surface and causing a fatal crash.",
+                science: "Led to a comprehensive overhaul of NASA's entry, descent, and landing (EDL) telemetry and fault-protection testing—enabling the later success of Phoenix, Curiosity, and Perseverance."
+            },
+            {
+                id: "17",
+                name: "Mars Climate Orbiter",
+                region: "Mars",
+                location: "Mars (Upper Atmosphere)",
+                period: "September 1999",
+                type: "Mars Weather Orbiter",
+                fateCategory: "Anomaly",
+                fate: "Destroyed during orbital insertion after entering the Martian atmosphere too low due to a ground-software navigation error that mixed imperial units (pound-force seconds) with metric units (newton-seconds).",
+                science: "Became one of engineering's most famous case studies in unit-verification standards and end-to-end systems integration across international aerospace teams."
+            },
+            {
+                id: "18",
+                name: "Spirit (MER-A)",
+                region: "Mars",
+                location: "Mars (Gusev Crater)",
+                period: "Jan 2004 – March 2010",
+                type: "Mars Exploration Rover",
+                fateCategory: "Power & Fuel",
+                fate: "Designed for a 90-sol mission, Spirit operated for over six years. In May 2009, its wheels broke through a crust into soft sand at 'Troy' and became permanently trapped. Unable to angle its solar panels toward the winter Sun, its internal heaters failed and contact ceased in March 2010.",
+                science: "Uncovered pure silica deposits formed by ancient hot springs or steam vents—strong evidence that Mars once had hydrothermal environments capable of supporting microbial life."
+            },
+            {
+                id: "19",
+                name: "Opportunity (MER-B)",
+                region: "Mars",
+                location: "Mars (Meridiani Planum)",
+                period: "Jan 2004 – June 2018",
+                type: "Mars Exploration Rover",
+                fateCategory: "Power & Fuel",
+                fate: "Operated for nearly 15 Earth years and drove 45.16 km (28.06 miles). In June 2018, a massive planet-wide dust storm blocked sunlight from reaching its solar panels, draining its batteries and causing fatal low-power faults.",
+                science: "Discovered 'blueberries' (hematite concretions) and sulfate-rich rocks proving that ancient Meridiani Planum was soaked in acidic liquid water."
+            },
+            {
+                id: "20",
+                name: "Phoenix Mars Lander",
+                region: "Mars",
+                location: "Mars (Green Valley, North Polar)",
+                period: "May – November 2008",
+                type: "Arctic Mars Lander",
+                fateCategory: "Power & Fuel",
+                fate: "Confirmed water ice in the Martian arctic. Designed only for the Martian summer, its solar power vanished as autumn darkness and winter carbon-dioxide ice enveloped the lander, crushing its solar arrays and ending the mission.",
+                science: "Directly scooped and vaporized subsurface Martian water ice, discovered perchlorate salts in the soil, and observed snow falling from Martian clouds."
+            },
+            {
+                id: "21",
+                name: "InSight Lander",
+                region: "Mars",
+                location: "Mars (Elysium Planitia)",
+                period: "Nov 2018 – Dec 2022",
+                type: "Geophysical Mars Lander",
+                fateCategory: "Power & Fuel",
+                fate: "Measured over 1,300 marsquakes with its seismometer. Over four years, thick layers of windblown Martian dust accumulated on its solar panels, steadily reducing power generation until its batteries depleted completely in December 2022.",
+                science: "Mapped the interior structure of Mars for the first time—measuring the thickness of its crust, depth of its mantle, and confirming a liquid iron-alloy core."
+            },
+            {
+                id: "22",
+                name: "Ingenuity Mars Helicopter",
+                region: "Mars",
+                location: "Mars (Jezero Crater)",
+                period: "April 2021 – Jan 2024",
+                type: "Autonomous Rotorcraft",
+                fateCategory: "Anomaly",
+                fate: "Completed 72 flights—far exceeding its planned five-flight technology demonstration. On Flight 72 in January 2024, navigation over featureless sand dunes caused a hard landing that snapped at least one rotor blade, permanently grounding it as a stationary weather/avionics sensor.",
+                science: "Achieved the first powered, controlled aerodynamic flight on another planet (in an atmosphere 1% as dense as Earth's), revolutionizing aerial scouting for future Mars and Titan missions."
+            },
+            {
+                id: "23",
+                name: "Mars Global Surveyor",
+                region: "Mars",
+                location: "Mars (Orbit)",
+                period: "Sept 1997 – Nov 2006",
+                type: "Mars Mapping Orbiter",
+                fateCategory: "Anomaly",
+                fate: "Mapped Mars for nine years. In November 2006, a faulty parameter update commanded a solar array gimbal against a mechanical stop; the onboard software misdiagnosed the issue and rotated the radiator toward the Sun, overheating and depleting the battery.",
+                science: "Captured over 240,000 high-resolution images, discovered young gullies carved by recent liquid water seepage, and mapped Mars's remnant crustal magnetic fields."
+            },
+            {
+                id: "24",
+                name: "Pioneer 10 & Pioneer 11",
+                region: "Outer Planets",
+                location: "Interstellar Trajectory (Deep Space)",
+                period: "1972/1973 – 2003/1995",
+                type: "Outer Planet Flyby Probes",
+                fateCategory: "Power & Fuel",
+                fate: "First spacecraft to traverse the asteroid belt and visit Jupiter (Pioneer 10) and Saturn (Pioneer 11). Both were retired when their plutonium-238 radioisotope thermoelectric generators (RTGs) decayed to the point where transmitters could no longer send detectable signals to Earth.",
+                science: "Proved spacecraft could safely cross the asteroid belt and survive Jupiter's lethal radiation belts, paving the way for Voyager, Galileo, and Cassini—while carrying golden plaques for potential extraterrestrial finders."
+            },
+            {
+                id: "25",
+                name: "Cassini-Huygens (Cassini Orbiter)",
+                region: "Outer Planets",
+                location: "Saturn (Atmospheric Entry)",
+                period: "Oct 1997 – Sept 2017",
+                type: "Saturn Orbiter",
+                fateCategory: "Planetary Protection",
+                fate: "Studied Saturn, its rings, and moons for 13 years. When its hydrazine propellant ran nearly empty, NASA intentionally plunged Cassini into Saturn's atmosphere ('Grand Finale') to prevent any biological contamination of potentially habitable moons Enceladus and Titan.",
+                science: "Discovered hydrothermal plumes of water erupting from Enceladus's subsurface ocean and liquid methane lakes on Titan, transforming our search for life in the outer solar system."
+            },
+            {
+                id: "26",
+                name: "Galileo Orbiter",
+                region: "Outer Planets",
+                location: "Jupiter (Atmospheric Entry)",
+                period: "Oct 1989 – Sept 2003",
+                type: "Jupiter Orbiter",
+                fateCategory: "Planetary Protection",
+                fate: "First spacecraft to orbit Jupiter. After surviving intense radiation well beyond its primary mission and running out of propellant, NASA deliberately steered Galileo into Jupiter's atmosphere in September 2003 to protect Europa from accidental Earth-microbe contamination.",
+                science: "Provided strong magnetic and geological evidence that Jupiter's moon Europa harbors a vast saltwater ocean beneath its icy crust, and deployed the first atmospheric probe into Jupiter."
+            },
+            {
+                id: "27",
+                name: "Magellan",
+                region: "Inner Planets",
+                location: "Venus (Atmospheric Entry)",
+                period: "May 1989 – Oct 1994",
+                type: "Venus Radar Mapping Orbiter",
+                fateCategory: "Design & Mass",
+                fate: "Mapped 98% of Venus's surface using synthetic aperture radar. At the end of its extended mission, NASA intentionally commanded Magellan to plunge into Venus's dense atmosphere to gather aerodynamic data before burning up.",
+                science: "Pierced Venus's thick sulfuric-acid clouds to reveal a surface dominated by volcanoes, tectonic rift valleys, and lava channels, while pioneering 'aerobraking' techniques."
+            },
+            {
+                id: "28",
+                name: "MESSENGER",
+                region: "Inner Planets",
+                location: "Mercury (Surface Impact)",
+                period: "Aug 2004 – April 2015",
+                type: "Mercury Orbiter",
+                fateCategory: "Power & Fuel",
+                fate: "First spacecraft to orbit Mercury. Once its propellant was completely exhausted after four years in orbit, gravity pulled it into a high-speed impact on Mercury's surface in April 2015.",
+                science: "Mapped 100% of Mercury, discovered water ice inside permanently shadowed polar craters despite 430°C daytime temperatures, and revealed Mercury's oversized iron core."
+            },
+            {
+                id: "29",
+                name: "NEAR Shoemaker",
+                region: "Asteroids & Comets",
+                location: "Asteroid 433 Eros",
+                period: "Feb 1996 – Feb 2001",
+                type: "Asteroid Orbiter & Lander",
+                fateCategory: "Power & Fuel",
+                fate: "First spacecraft to orbit and soft-land on an asteroid. After gently touching down on Eros without landing legs, it operated for two weeks before extreme cold (-173°C) drained its batteries and severed communications.",
+                science: "Revealed that near-Earth asteroid 433 Eros is a solid, primordial relic from the birth of the solar system rather than a loose rubble pile."
+            },
+            {
+                id: "30",
+                name: "Dawn",
+                region: "Asteroids & Comets",
+                location: "Dwarf Planet Ceres (Orbit)",
+                period: "Sept 2007 – Oct 2018",
+                type: "Ion-Propelled Asteroid Orbiter",
+                fateCategory: "Power & Fuel",
+                fate: "Orbited both Vesta and Ceres. In October 2018, Dawn exhausted its hydrazine attitude-control fuel, losing the ability to keep its antenna pointed at Earth or solar arrays aimed at the Sun. It remains derelict in a sterile, decades-long quarantine orbit around Ceres.",
+                science: "First spacecraft to orbit two extraterrestrial bodies using ion propulsion; discovered bright sodium-carbonate salt deposits and cryovolcanoes on Ceres, indicating subsurface brine."
+            },
+            {
+                id: "31",
+                name: "Deep Impact (Impactor & Flyby)",
+                region: "Asteroids & Comets",
+                location: "Comet Tempel 1 / Heliocentric Orbit",
+                period: "Jan 2005 – Aug 2013",
+                type: "Comet Impactor & Flyby Probe",
+                fateCategory: "Anomaly",
+                fate: "The copper impactor probe collided with Comet Tempel 1 as planned in July 2005. The flyby spacecraft continued on an extended mission (EPOXI) until August 2013, when a Y2K-style software rollover bug caused continuous computer reboots, losing orientation and communications.",
+                science: "Blasted a crater into Comet Tempel 1 to expose pristine interior material, revealing comets contain far more organic molecules and crystalline silicates than expected."
+            },
+            {
+                id: "32",
+                name: "Stardust",
+                region: "Asteroids & Comets",
+                location: "Heliocentric Orbit",
+                period: "Feb 1999 – March 2011",
+                type: "Comet Sample-Return / Flyby",
+                fateCategory: "Power & Fuel",
+                fate: "Returned comet dust samples to Earth in 2006 and visited Comet Tempel 1 in 2011. NASA performed a final 'burn to depletion' engine test in March 2011 to measure remaining fuel, then turned off its transmitters so it would not interfere with active deep-space missions.",
+                science: "Used aerogel collectors to bring back the first pristine samples from Comet Wild 2, discovering high-temperature minerals like olivine—proving material mixed across the early solar system."
+            },
+            {
+                id: "33",
+                name: "Skylab",
+                region: "Earth & Heliocentric",
+                location: "Earth (Re-entry over Australia / Indian Ocean)",
+                period: "May 1973 – July 1979",
+                type: "First U.S. Space Station",
+                fateCategory: "Orbital Debris",
+                fate: "Occupied by three astronaut crews in 1973–1974 and then left vacant. Higher-than-predicted solar activity expanded Earth's upper atmosphere, increasing drag. Because the Space Shuttle was delayed until 1981, NASA could not send a reboost mission in time, and Skylab burned up on re-entry in July 1979.",
+                science: "Proved humans could live and work in microgravity for up to 84 days and captured unprecedented ultraviolet and X-ray observations of the Sun's corona."
+            },
+            {
+                id: "34",
+                name: "Spitzer Space Telescope",
+                region: "Earth & Heliocentric",
+                location: "Earth-Trailing Heliocentric Orbit",
+                period: "Aug 2003 – Jan 2020",
+                type: "Infrared Space Observatory",
+                fateCategory: "Power & Fuel",
+                fate: "Studied the infrared universe for over 16 years. As Spitzer drifted farther behind Earth in its heliocentric orbit, the extreme angle required to point its antenna toward Earth starved its solar panels of sunlight, leading NASA to place it into permanent safe mode in January 2020.",
+                science: "Helped discover the seven Earth-sized exoplanets of the TRAPPIST-1 system, pierced dusty stellar nurseries, and observed light from the earliest galaxies."
+            },
+            {
+                id: "35",
+                name: "Kepler Space Telescope",
+                region: "Earth & Heliocentric",
+                location: "Earth-Trailing Heliocentric Orbit",
+                period: "March 2009 – Oct 2018",
+                type: "Exoplanet-Hunting Observatory",
+                fateCategory: "Power & Fuel",
+                fate: "Discovered over 2,600 exoplanets. After losing two of its four reaction wheels (mitigated via solar-pressure balancing during the K2 mission), Kepler completely exhausted its thruster fuel in October 2018 and was deactivated in a safe solar orbit.",
+                science: "Revolutionized astronomy by proving statistically that planets outnumber stars in our galaxy and that rocky, Earth-sized planets in habitable zones are common."
+            },
+            {
+                id: "36",
+                name: "Compton Gamma Ray Observatory (CGRO)",
+                region: "Earth & Heliocentric",
+                location: "Earth (Controlled Pacific Re-entry)",
+                period: "April 1991 – June 2000",
+                type: "Great Observatory Telescope",
+                fateCategory: "Orbital Debris",
+                fate: "After one of its three stabilizing gyroscopes failed in late 1999, NASA decided to intentionally deorbit the massive 17-ton observatory into the Pacific Ocean while it still had enough attitude control to guarantee a safe, targeted splashdown.",
+                science: "Mapped over 2,700 gamma-ray bursts across the sky, proving these colossal explosions originate in distant galaxies rather than inside our Milky Way."
+            },
+            {
+                id: "37",
+                name: "ERBS (Earth Radiation Budget Satellite)",
+                region: "Earth & Heliocentric",
+                location: "Earth (Uncontrolled Re-entry)",
+                period: "Oct 1984 – Jan 2023",
+                type: "Earth Science Satellite",
+                fateCategory: "Power & Fuel",
+                fate: "Deployed from Space Shuttle Challenger in 1984 and operated for 21 years (far exceeding its 2-year design life). Retired in 2005 due to battery degradation, it remained a derelict satellite in low Earth orbit until atmospheric drag pulled it down safely over the Bering Sea in January 2023.",
+                science: "Measured how Earth absorbs and radiates solar energy and tracked stratospheric ozone depletion—providing key scientific data behind the 1987 Montreal Protocol."
+            },
+            {
+                id: "38",
+                name: "UARS (Upper Atmosphere Research Satellite)",
+                region: "Earth & Heliocentric",
+                location: "Earth (Uncontrolled Re-entry)",
+                period: "Sept 1991 – Sept 2011",
+                type: "Atmospheric Science Satellite",
+                fateCategory: "Power & Fuel",
+                fate: "Decommissioned in 2005 after completing its mission and running low on propellant. After six years as orbital debris, atmospheric drag caused it to re-enter over the Pacific Ocean in September 2011.",
+                science: "Provided the first comprehensive global measurements of ozone-destroying chlorine compounds, winds, and temperatures in Earth's upper atmosphere."
+            },
+            {
+                id: "39",
+                name: "CONTOUR (Comet Nucleus Tour)",
+                region: "Asteroids & Comets",
+                location: "Heliocentric Orbit",
+                period: "July – August 2002",
+                type: "Comet Flyby Probe",
+                fateCategory: "Anomaly",
+                fate: "Broke apart into at least three pieces in August 2002 when its solid-fuel rocket motor fired to leave Earth orbit, likely due to structural overheating from the rocket plume.",
+                science: "Prompted stricter thermal-plume modeling and telemetry coverage requirements during solid-rocket motor burns for subsequent NASA deep-space missions."
+            },
+            {
+                id: "40",
+                name: "Genesis",
+                region: "Earth & Heliocentric",
+                location: "Earth (Utah Desert Impact)",
+                period: "Aug 2001 – Sept 2004",
+                type: "Solar Wind Sample-Return Capsule",
+                fateCategory: "Anomaly",
+                fate: "Successfully collected solar wind particles, but its return capsule crash-landed in Utah when backwards-installed deceleration sensors failed to trigger parachute deployment. (Scientists still salvaged valuable solar samples from the wreckage).",
+                science: "Revealed that the Sun has a different isotopic ratio of oxygen and nitrogen than Earth and the inner planets—solving a decades-old mystery of how our solar system formed."
+            }
+        ];
+
+        // State Variables
+        let currentRegion = "ALL";
+        let currentFate = "ALL";
+        let searchQuery = "";
+
+        // DOM Elements
+        const grid = document.getElementById("missionsGrid");
+        const emptyState = document.getElementById("emptyState");
+        const searchInput = document.getElementById("searchInput");
+        const fateFilter = document.getElementById("fateFilter");
+        const statShowing = document.getElementById("stat-showing");
+        const regionButtons = document.querySelectorAll(".region-btn");
+
+        // Badge Color Helper
+        function getFateBadgeStyle(category) {
+            switch(category) {
+                case "Power & Fuel": return "bg-amber-500/10 text-amber-400 border-amber-500/20";
+                case "Design & Mass": return "bg-sky-500/10 text-sky-400 border-sky-500/20";
+                case "Planetary Protection": return "bg-emerald-500/10 text-emerald-400 border-emerald-500/20";
+                case "Orbital Debris": return "bg-purple-500/10 text-purple-400 border-purple-500/20";
+                case "Anomaly": return "bg-rose-500/10 text-rose-400 border-rose-500/20";
+                default: return "bg-slate-800 text-slate-300 border-slate-700";
+            }
+        }
+
+        // NASA Space Imagery Helper (Moon, Mars, Saturn, Sun, Deep Space & Spacecraft)
+        function getRegionImage(region, id) {
+            const specificImages = {
+                "01": "https://images-assets.nasa.gov/image/as11-40-5874/as11-40-5874~medium.jpg", // Apollo 11 Moon
+                "04": "https://images-assets.nasa.gov/image/as15-88-11901/as15-88-11901~medium.jpg", // Apollo 15 Rover
+                "19": "https://images-assets.nasa.gov/image/PIA19808/PIA19808~medium.jpg", // Opportunity Mars Rover
+                "22": "https://images-assets.nasa.gov/image/PIA24542/PIA24542~medium.jpg", // Ingenuity Helicopter
+                "25": "https://images-assets.nasa.gov/image/PIA21345/PIA21345~medium.jpg", // Cassini Saturn
+                "40": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001435/GSFC_20171208_Archive_e001435~medium.jpg" // The Sun
+            };
+            if (specificImages[id]) return specificImages[id];
+
+            switch(region) {
+                case "Moon": return "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001982/GSFC_20171208_Archive_e001982~medium.jpg";
+                case "Mars": return "https://images-assets.nasa.gov/image/PIA24542/PIA24542~medium.jpg";
+                case "Outer Planets": return "https://images-assets.nasa.gov/image/PIA21345/PIA21345~medium.jpg";
+                case "Inner Planets": return "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001435/GSFC_20171208_Archive_e001435~medium.jpg";
+                case "Asteroids & Comets": return "https://images-assets.nasa.gov/image/PIA23378/PIA23378~medium.jpg";
+                default: return "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001435/GSFC_20171208_Archive_e001435~medium.jpg";
+            }
+        }
+
+        // Render Cards
+        function renderMissions() {
+            const filtered = missions.filter(m => {
+                const matchesRegion = currentRegion === "ALL" || m.region === currentRegion;
+                const matchesFate = currentFate === "ALL" || m.fateCategory === currentFate;
+                const q = searchQuery.toLowerCase();
+                const matchesSearch = !q || 
+                    m.name.toLowerCase().includes(q) || 
+                    m.location.toLowerCase().includes(q) || 
+                    m.type.toLowerCase().includes(q) ||
+                    m.fate.toLowerCase().includes(q) ||
+                    m.science.toLowerCase().includes(q);
+                return matchesRegion && matchesFate && matchesSearch;
+            });
+
+            if (statShowing) {
+                statShowing.textContent = filtered.length;
+            }
+
+            if (filtered.length === 0) {
+                grid.innerHTML = "";
+                emptyState.classList.remove("hidden");
+                return;
+            }
+
+            emptyState.classList.add("hidden");
+            grid.innerHTML = filtered.map(m => `
+                <article onclick="openMissionModal('${m.id}')" class="glass-card rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between group">
+                    <div>
+                        <div class="relative h-32 w-full bg-slate-950 overflow-hidden border-b border-slate-800/80">
+                            <img src="${getRegionImage(m.region, m.id)}" alt="${m.name}" loading="lazy" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-transparent to-black/30"></div>
+                            <div class="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+                                <span class="font-mono text-xs px-2 py-0.5 rounded bg-slate-950/80 text-sky-400 border border-slate-700 backdrop-blur-sm">#${m.id}</span>
+                                <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full border backdrop-blur-sm bg-slate-950/75 ${getFateBadgeStyle(m.fateCategory)}">
+                                    ${m.fateCategory}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-5 pb-0">
+                            <h3 class="text-lg font-bold text-white group-hover:text-sky-400 transition leading-snug mb-1">${m.name}</h3>
+                            <p class="text-xs text-slate-400 mb-3">${m.type}</p>
+                            
+                            <div class="space-y-1.5 text-xs text-slate-300 bg-slate-950/50 p-3 rounded-xl border border-slate-800/80 mb-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-slate-500">📍</span>
+                                    <span class="truncate font-medium">${m.location}</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-slate-500">🗓️</span>
+                                    <span>${m.period}</span>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-400 line-clamp-3 leading-relaxed">
+                                ${m.fate}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="px-5 pb-5 mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-medium text-sky-400">
+                        <span>Explore Mission & Science</span>
+                        <svg class="w-4 h-4 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </article>
+            `).join("");
+        }
+
+        // Event Listeners
+        searchInput.addEventListener("input", (e) => {
+            searchQuery = e.target.value;
+            renderMissions();
+        });
+
+        fateFilter.addEventListener("change", (e) => {
+            currentFate = e.target.value;
+            renderMissions();
+        });
+
+        regionButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                regionButtons.forEach(b => {
+                    b.classList.remove("bg-sky-500", "text-slate-950", "font-semibold");
+                    b.classList.add("bg-slate-900", "text-slate-300");
+                });
+                btn.classList.remove("bg-slate-900", "text-slate-300");
+                btn.classList.add("bg-sky-500", "text-slate-950", "font-semibold");
+                
+                currentRegion = btn.dataset.region;
+                renderMissions();
+            });
+        });
+
+        function resetFilters() {
+            currentRegion = "ALL";
+            currentFate = "ALL";
+            searchQuery = "";
+            searchInput.value = "";
+            fateFilter.value = "ALL";
+            regionButtons.forEach(b => {
+                b.classList.remove("bg-sky-500", "text-slate-950", "font-semibold");
+                b.classList.add("bg-slate-900", "text-slate-300");
+            });
+            regionButtons[0].classList.remove("bg-slate-900", "text-slate-300");
+            regionButtons[0].classList.add("bg-sky-500", "text-slate-950", "font-semibold");
+            renderMissions();
+        }
+
+        // Modal Controls
+        function getArtifactVoice(m) {
+            const customVoices = {
+                "01": "\"I am Eagle's descent stage. On July 20, 1969, I carried the first humans onto the Sea of Tranquility. When my upper stage blasted off for home, I stayed behind as a silent launchpad—and my laser mirror still bounces light beams back to Earth today.\"",
+                "04": "\"I am LRV-1, the very first electric Moon Buggy. Astronauts drove me 27.9 km across lunar mountains! When my batteries ran out, they parked me so my TV camera could film their rocket blasting off.\"",
+                "07": "\"I am Surveyor 3. I soft-landed on the Moon in 1967 to prove the lunar dust wouldn't swallow astronauts whole. Two years later, Apollo 12 astronauts walked right up to me and took my camera home!\"",
+                "15": "\"I am Sojourner, the microwave-sized rover that took humanity's very first wheel tracks on Mars in 1997. After my Pathfinder lander froze in the Martian night, I circled it silently waiting for instructions.\"",
+                "18": "\"I am Spirit. I was only supposed to last 90 days on Mars, yet I explored for over 6 years until my wheels broke into soft sand at Troy. Even stuck, I uncovered silica proving Mars once had hot springs!\"",
+                "19": "\"I am Opportunity. For nearly 15 years, I rolled 45 kilometers across Mars—a marathon on another world—until a giant planet-wide dust storm blotted out the Sun in 2018. My battery is low, and it's getting dark.\"",
+                "21": "\"I am InSight. For four years I pressed my sensitive seismometer against the Martian dirt, listening to the heartbeat of a planet—over 1,300 marsquakes—until Martian dust gently covered my solar wings.\"",
+                "22": "\"I am Ingenuity. Engineers hoped I would fly 5 times in Mars's ultra-thin air. I flew 72 times! Even after snapping a rotor blade on Flight 72, I still wake up to monitor the Martian weather.\"",
+                "24": "\"We are Pioneer 10 and 11—the first human-made machines to cross the asteroid belt and visit Jupiter and Saturn. Our nuclear batteries have faded, so we now drift silently toward the stars carrying golden plaques from Earth.\"",
+                "25": "\"I am Cassini. After 13 years exploring Saturn's rings and ocean moon Enceladus, my fuel ran low. To protect any alien microbes that might live on Enceladus, NASA steered me into Saturn's clouds to become part of the planet I studied.\"",
+                "29": "\"I am NEAR Shoemaker. I wasn't even built with landing legs, yet in 2001 I gently touched down on Asteroid 433 Eros and kept transmitting data for two weeks before the -173°C cold put me to sleep.\"",
+                "30": "\"I am Dawn. Using futuristic blue ion thrusters, I orbited both Vesta and dwarf planet Ceres. Out of hydrazine fuel, I now orbit Ceres silently for decades as a sterile monument.\"",
+                "35": "\"I am Kepler. Staring steadily at 150,000 stars, I discovered over 2,600 planets beyond our solar system. With my fuel spent, I drift peacefully behind Earth in orbit around the Sun.\""
+            };
+            return customVoices[m.id] || `"I am ${m.name}, stationed at ${m.location}. Active during ${m.period}, my mission ended due to ${m.fateCategory.toLowerCase()}, leaving behind vital discoveries for future space explorers."`;
+        }
+
+        function openMissionModal(id) {
+            const m = missions.find(item => item.id === id);
+            if (!m) return;
+
+            document.getElementById("modalId").textContent = `#${m.id}`;
+            document.getElementById("modalRegion").textContent = m.region;
+            document.getElementById("modalTitle").textContent = m.name;
+            document.getElementById("modalType").textContent = m.type;
+            document.getElementById("modalImage").src = getRegionImage(m.region, m.id);
+            document.getElementById("modalDiary").textContent = getArtifactVoice(m);
+            document.getElementById("modalLocation").textContent = m.location;
+            document.getElementById("modalPeriod").textContent = m.period;
+            
+            const badge = document.getElementById("modalFateBadge");
+            badge.textContent = m.fateCategory;
+            badge.className = `text-xs font-semibold px-2.5 py-1 rounded-md border ${getFateBadgeStyle(m.fateCategory)}`;
+
+            document.getElementById("modalFateDesc").textContent = m.fate;
+            document.getElementById("modalScience").textContent = m.science;
+
+            const modal = document.getElementById("missionModal");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        }
+
+        // Interactive Story Mode Data & Functions (8 Iconic Chapters for School-Age Learners)
+        const storyChapters = [
+            {
+                title: "Chapter 1: The Launchpad at Tranquility Base",
+                location: "Sea of Tranquility, The Moon",
+                year: "July 1969 • Apollo 11 Eagle",
+                image: "https://images-assets.nasa.gov/image/as11-40-5874/as11-40-5874~medium.jpg",
+                narrative: "\"When Neil Armstrong and Buzz Aldrin blasted off from the Moon to return to Earth, they couldn't take me with them. I am the lower half of the Apollo 11 Lunar Module Eagle. My golden foil legs still stand on the Moon today, holding up the scientific instruments they left beside me.\"",
+                science: "The Laser Ranging Retroreflector left at Tranquility Base is still used by astronomers on Earth today—proving the Moon is slowly drifting away from us by 3.8 centimeters every year!"
+            },
+            {
+                title: "Chapter 2: Electric Buggies on the Moon",
+                location: "Hadley-Apennine, Descartes & Taurus-Littrow",
+                year: "1971–1972 • Lunar Roving Vehicles (LRVs)",
+                image: "https://images-assets.nasa.gov/image/as15-88-11901/as15-88-11901~medium.jpg",
+                narrative: "\"Imagine driving an electric car where there are no roads, no air, and one-sixth of Earth's gravity! Three Lunar Roving Vehicles carried Apollo astronauts nearly 100 kilometers combined across craters and mountains. When our batteries ran dry, we were parked permanently on the Moon.\"",
+                science: "Thanks to the LRVs, astronauts collected distant lunar highland rocks and volcanic 'orange soil' that proved the Moon once had a global magma ocean."
+            },
+            {
+                title: "Chapter 3: The Little Rover That Could",
+                location: "Ares Vallis, Mars",
+                year: "July – September 1997 • Sojourner Rover",
+                image: "https://images-assets.nasa.gov/image/PIA01122/PIA01122~medium.jpg",
+                narrative: "\"Before me, nobody had ever driven a wheeled robot on another planet. Weighing just 11.5 kg—about the size of a microwave oven—I rolled off the Mars Pathfinder lander in 1997. When freezing Martian nights finally drained Pathfinder's battery, I kept circling my silent lander.\"",
+                science: "Sojourner analyzed Martian rocks up close and found rounded pebbles—our very first surface proof that ancient Mars once had rushing rivers of liquid water."
+            },
+            {
+                title: "Chapter 4: A 15-Year Martian Marathon",
+                location: "Meridiani Planum, Mars",
+                year: "2004–2018 • Opportunity Rover",
+                image: "https://images-assets.nasa.gov/image/PIA19808/PIA19808~medium.jpg",
+                narrative: "\"Engineers designed me to survive 90 Martian days. Instead, I explored Mars for nearly 15 Earth years and drove 45.16 kilometers! In June 2018, a gigantic dust storm wrapped around the entire planet, turning day into pitch-black night until my solar-charged batteries went to sleep forever.\"",
+                science: "Opportunity discovered tiny spherical minerals nicknamed 'blueberries' (hematite) that only form in liquid water—proving Mars could once have supported microbial life."
+            },
+            {
+                title: "Chapter 5: Listening to the Heartbeat of Mars",
+                location: "Elysium Planitia, Mars",
+                year: "2018–2022 • InSight Lander",
+                image: "https://images-assets.nasa.gov/image/PIA22743/PIA22743~medium.jpg",
+                narrative: "\"Unlike rovers, I never moved an inch after landing. Instead, I placed a super-sensitive dome seismometer onto the Martian ground to listen for vibrations deep underground. Over four years, layers of Martian dust settled over my solar panels until my power faded in December 2022.\"",
+                science: "InSight detected over 1,300 marsquakes, allowing scientists to map Mars's inner crust, mantle, and liquid iron core for the very first time."
+            },
+            {
+                title: "Chapter 6: First Wings on Another World",
+                location: "Jezero Crater, Mars",
+                year: "2021–2024 • Ingenuity Mars Helicopter",
+                image: "https://images-assets.nasa.gov/image/PIA24542/PIA24542~medium.jpg",
+                narrative: "\"Flying on Mars is like flying 30 kilometers high on Earth because the air is 99% thinner! My blades had to spin 2,400 times per minute just to lift off. I completed 72 flights—14 times more than planned—before a hard landing on sand dunes snapped my rotor blade.\"",
+                science: "Ingenuity proved aerial scouting works on other planets, inspiring future flying drones like NASA's Dragonfly mission to Saturn's moon Titan."
+            },
+            {
+                title: "Chapter 7: Sacrificed to Protect Alien Oceans",
+                location: "Saturn's Upper Atmosphere",
+                year: "1997–2017 • Cassini Orbiter",
+                image: "https://images-assets.nasa.gov/image/PIA21345/PIA21345~medium.jpg",
+                narrative: "\"For 13 years, I orbited Saturn, photographing its icy rings and discovering giant water geysers erupting from its moon Enceladus. When my fuel tank neared empty, NASA couldn't risk me crashing onto Enceladus and contaminating it with Earth microbes—so I plunged into Saturn itself.\"",
+                science: "Cassini discovered subsurface oceans on Enceladus and liquid methane seas on Titan—making Saturn's moons top targets in the search for life beyond Earth."
+            },
+            {
+                title: "Chapter 8: Silent Messengers Beyond the Planets",
+                location: "Interstellar Space & Earth-Trailing Orbit",
+                year: "1972–Present • Pioneer 10, 11 & Kepler",
+                image: "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001435/GSFC_20171208_Archive_e001435~medium.jpg",
+                narrative: "\"Some of us aren't parked on a planet—we are drifting forever through space! Pioneer 10 and 11 are heading out of our solar system with golden plaques showing where Earth is, while the Kepler Space Telescope floats silently in solar orbit after running out of thruster fuel.\"",
+                science: "Pioneer survived Jupiter's fierce radiation belts to unlock the outer solar system, while Kepler discovered over 2,600 exoplanets—proving planets outnumber stars!"
+            }
+        ];
+
+        let currentStoryIndex = 0;
+
+        function openStoryMode(index) {
+            currentStoryIndex = index;
+            renderStoryChapter();
+            const modal = document.getElementById("storyModal");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        }
+
+        function renderStoryChapter() {
+            const chapter = storyChapters[currentStoryIndex];
+            document.getElementById("storyChapterBadge").textContent = `Chapter ${currentStoryIndex + 1} of ${storyChapters.length}`;
+            document.getElementById("storyTitle").textContent = chapter.title;
+            document.getElementById("storyImage").src = chapter.image;
+            document.getElementById("storyLocation").textContent = chapter.location;
+            document.getElementById("storyYear").textContent = chapter.year;
+            document.getElementById("storyNarrative").textContent = chapter.narrative;
+            document.getElementById("storyScience").textContent = chapter.science;
+
+            document.getElementById("prevStoryBtn").disabled = currentStoryIndex === 0;
+            const nextBtn = document.getElementById("nextStoryBtn");
+            nextBtn.textContent = currentStoryIndex === storyChapters.length - 1 ? "Finish & Explore All 40 →" : "Next Chapter →";
+
+            const dots = document.getElementById("storyDots");
+            dots.innerHTML = storyChapters.map((_, idx) => `
+                <button onclick="openStoryMode(${idx})" class="w-2.5 h-2.5 rounded-full transition ${idx === currentStoryIndex ? 'bg-amber-400 scale-125' : 'bg-slate-700 hover:bg-slate-500'}"></button>
+            `).join("");
+        }
+
+        function changeStory(delta) {
+            if (currentStoryIndex + delta >= storyChapters.length) {
+                closeModal("storyModal");
+                return;
+            }
+            currentStoryIndex = Math.max(0, Math.min(storyChapters.length - 1, currentStoryIndex + delta));
+            renderStoryChapter();
+        }
+
+        // Junior Space Cadet Quiz Data & Functions
+        const quizQuestions = [
+            {
+                q: "Why did NASA intentionally crash the Cassini orbiter into Saturn in 2017?",
+                options: [
+                    "To test if Saturn has a solid rocky surface",
+                    "To prevent Earth microbes from contaminating potentially habitable moons like Enceladus",
+                    "Because its cameras stopped working in 1999"
+                ],
+                answer: 1,
+                explanation: "Correct! Planetary Protection rules ensure we don't accidentally contaminate ocean moons like Enceladus or Europa with Earth bacteria."
+            },
+            {
+                q: "Which Mars rover operated for nearly 15 years before a planet-wide dust storm blocked its solar panels?",
+                options: ["Sojourner", "Opportunity", "InSight"],
+                answer: 1,
+                explanation: "Spot on! Opportunity drove 45.16 km across Mars from 2004 until the global dust storm of June 2018."
+            },
+            {
+                q: "Which Apollo 11 instrument left on the Moon is STILL used by scientists on Earth today?",
+                options: [
+                    "The Laser Ranging Retroreflector",
+                    "The Lunar Roving Vehicle battery pack",
+                    "The Ascent Stage rocket engine"
+                ],
+                answer: 0,
+                explanation: "Yes! Observatories bounce laser pulses off Apollo 11's retroreflector to measure the Moon's distance down to the millimeter."
+            },
+            {
+                q: "How many flights did the Ingenuity Mars Helicopter complete before damaging a rotor blade?",
+                options: ["5 flights", "21 flights", "72 flights"],
+                answer: 2,
+                explanation: "Amazing! Planned for just 5 technology-demo flights, Ingenuity completed 72 flights in Mars's thin atmosphere."
+            },
+            {
+                q: "Which spacecraft became the first to orbit and soft-land on an asteroid (433 Eros)?",
+                options: ["NEAR Shoemaker", "Dawn", "Kepler Space Telescope"],
+                answer: 0,
+                explanation: "Correct! NEAR Shoemaker touched down gently on 433 Eros in 2001 despite not even having landing legs."
+            }
+        ];
+
+        let quizIdx = 0;
+        let quizScore = 0;
+
+        function openQuizModal() {
+            quizIdx = 0;
+            quizScore = 0;
+            renderQuizQuestion();
+            const modal = document.getElementById("quizModal");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        }
+
+        function renderQuizQuestion() {
+            const item = quizQuestions[quizIdx];
+            document.getElementById("quizProgress").textContent = `Question ${quizIdx + 1} of ${quizQuestions.length}`;
+            document.getElementById("quizScore").textContent = `Score: ${quizScore}`;
+            document.getElementById("quizQuestion").textContent = item.q;
+            document.getElementById("quizFeedback").classList.add("hidden");
+            document.getElementById("nextQuizBtn").classList.add("hidden");
+
+            const optionsEl = document.getElementById("quizOptions");
+            optionsEl.innerHTML = item.options.map((opt, i) => `
+                <button onclick="selectQuizOption(${i})" class="quiz-opt-btn w-full text-left p-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sm text-slate-200 transition">
+                    ${opt}
+                </button>
+            `).join("");
+        }
+
+        function selectQuizOption(selectedIdx) {
+            const item = quizQuestions[quizIdx];
+            const buttons = document.querySelectorAll(".quiz-opt-btn");
+            buttons.forEach((btn, i) => {
+                btn.disabled = true;
+                if (i === item.answer) {
+                    btn.classList.remove("bg-slate-900", "border-slate-700");
+                    btn.classList.add("bg-emerald-500/20", "border-emerald-500", "text-emerald-200");
+                } else if (i === selectedIdx) {
+                    btn.classList.remove("bg-slate-900", "border-slate-700");
+                    btn.classList.add("bg-rose-500/20", "border-rose-500", "text-rose-200");
+                }
+            });
+
+            const feedback = document.getElementById("quizFeedback");
+            feedback.classList.remove("hidden");
+            if (selectedIdx === item.answer) {
+                quizScore++;
+                document.getElementById("quizScore").textContent = `Score: ${quizScore}`;
+                feedback.className = "p-3.5 rounded-xl text-sm bg-emerald-950/60 border border-emerald-500/30 text-emerald-200";
+                feedback.textContent = item.explanation;
+            } else {
+                feedback.className = "p-3.5 rounded-xl text-sm bg-rose-950/60 border border-rose-500/30 text-rose-200";
+                feedback.textContent = "Not quite! " + item.explanation;
+            }
+
+            const nextBtn = document.getElementById("nextQuizBtn");
+            nextBtn.classList.remove("hidden");
+            nextBtn.textContent = quizIdx === quizQuestions.length - 1 ? "See Final Score" : "Next Question →";
+        }
+
+        function nextQuizQuestion() {
+            if (quizIdx < quizQuestions.length - 1) {
+                quizIdx++;
+                renderQuizQuestion();
+            } else {
+                document.getElementById("quizQuestion").textContent = `Mission Complete! You scored ${quizScore} out of ${quizQuestions.length}!`;
+                document.getElementById("quizOptions").innerHTML = `
+                    <div class="p-4 rounded-xl bg-indigo-950/50 border border-indigo-500/30 text-sm text-slate-200">
+                        ${quizScore >= 4 ? "🌟 Certified Starlight Archivist! You know the stories of NASA's off-world pioneers." : "🚀 Great effort, Space Cadet! Explore Story Mode to uncover even more mission secrets."}
+                    </div>
+                `;
+                document.getElementById("quizFeedback").classList.add("hidden");
+                const nextBtn = document.getElementById("nextQuizBtn");
+                nextBtn.textContent = "Play Again";
+                nextBtn.onclick = () => {
+                    nextBtn.onclick = nextQuizQuestion;
+                    openQuizModal();
+                };
+            }
+        }
+
+        function openRandomMission() {
+            const randomIndex = Math.floor(Math.random() * missions.length);
+            openMissionModal(missions[randomIndex].id);
+        }
+
+        function openTheoryModal() {
+            const modal = document.getElementById("theoryModal");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        }
+
+        // Close modals on Escape key or backdrop click
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                closeModal("missionModal");
+                closeModal("theoryModal");
+                closeModal("storyModal");
+                closeModal("quizModal");
+            }
+        });
+
+        document.getElementById("missionModal").addEventListener("click", (e) => {
+            if (e.target.id === "missionModal") closeModal("missionModal");
+        });
+        document.getElementById("theoryModal").addEventListener("click", (e) => {
+            if (e.target.id === "theoryModal") closeModal("theoryModal");
+        });
+        document.getElementById("storyModal").addEventListener("click", (e) => {
+            if (e.target.id === "storyModal") closeModal("storyModal");
+        });
+        document.getElementById("quizModal").addEventListener("click", (e) => {
+            if (e.target.id === "quizModal") closeModal("quizModal");
+        });
+
+        // Initial Render
+        renderMissions();
+    </script>
+</body>
+</html>
